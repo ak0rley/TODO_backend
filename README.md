@@ -21,7 +21,7 @@ python manage.py migrate)
 
 Available API Endpoints
 Method	  Endpoint	
-GET	      /api/tasks/	
-POST	  /api/tasks/	
-PATCH	  /api/tasks/{id}/	
-DELETE	  /api/tasks/{id}/
+GET	      (/api/tasks/	)
+POST	  (/api/tasks/	)
+PATCH	  (/api/tasks/{id}/)	
+DELETE	  (/api/tasks/{id}/)
