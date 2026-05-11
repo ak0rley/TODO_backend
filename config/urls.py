@@ -16,10 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 from django.shortcuts import redirect
+=======
+>>>>>>> fc7cbbb4675e1cea215b4af08f7089e938f17037
 
 urlpatterns = [
     path('', lambda request: redirect('/api/todos/')),  # Redirect root to API todos
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('api/', include('auth_app.urls')),
+=======
+    path('api/', include('todo.urls')),
+>>>>>>> fc7cbbb4675e1cea215b4af08f7089e938f17037
 ]
