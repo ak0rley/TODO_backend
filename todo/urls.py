@@ -1,7 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from todo.views import TaskViewSet, HelloView 
+
+# Create router first
+router = DefaultRouter()
+router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/auth/', include('authentication.urls')),  # ← changed from 'accounts.urls'
+    path('', include(router.urls)),
+    path('hello/', HelloView.as_view(), name='hello'),
 ]
