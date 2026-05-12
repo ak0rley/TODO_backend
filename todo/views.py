@@ -16,10 +16,31 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     @extend_schema(
         summary="List all tasks",
-        description="Returns all tasks."
+        description="Returns all tasks.",
+        responses={
+            200: {
+                "type": "object",
+                "example": {
+                    "message": "These are today's tasks",
+                    "tasks": [
+                        {
+                            "id": 1,
+                            "title": "Complete the assignment",
+                            "completed": False
+                        }
+                    ]
+                }
+            }
+        }
     )
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        tasks = Task.objects.all()
+        serializer = self.get_serializer(tasks, many=True)
+
+        return Response({
+            "message": "These are today's tasks",
+            "tasks": serializer.data
+        })
 
 
 class HelloView(APIView):
