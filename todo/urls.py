@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from todo.views import TaskViewSet, HelloView  # replace 'todo' with your app name
+from todo.views import TaskViewSet, HelloView 
 
 # Create router first
 router = DefaultRouter()
