@@ -1,5 +1,3 @@
-# serializers.py converts python objects to JSON format and vice versa, which is essential for API communication.
-
 from rest_framework import serializers
 from .models import Task
 
