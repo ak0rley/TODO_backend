@@ -6,8 +6,36 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from drf_spectacular.utils import extend_schema_view, extend_schema
 
 # Create your views here.
+
+@extend_schema_view(
+    list=extend_schema(
+        summary="List all tasks",
+        description="Returns all tasks."
+    ),
+    create=extend_schema(
+        summary="Create a task",
+        description="Creates a new task."
+    ),
+    retrieve=extend_schema(
+        summary="Retrieve a task",
+        description="Returns a single task by ID."
+    ),
+    update=extend_schema(
+        summary="Update a task",
+        description="Updates an existing task completely."
+    ),
+    partial_update=extend_schema(
+        summary="Partially update a task",
+        description="Updates part of a task."
+    ),
+    destroy=extend_schema(
+        summary="Delete a task",
+        description="Deletes a task."
+    ),
+)
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
