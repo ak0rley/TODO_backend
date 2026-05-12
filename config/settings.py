@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular',
     'todo',
     'authentication',
 ]
@@ -111,10 +112,21 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My API',
+    'DESCRIPTION': 'API documentation for my project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 # Custom User Model
 AUTH_USER_MODEL = 'authentication.User'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
