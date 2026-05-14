@@ -5,10 +5,6 @@ from .models import Task
 
 class TaskSerializer(serializers.ModelSerializer):
 
-    created_at = serializers.DateTimeField(
-        format="%d %b %Y, %I:%M %p"
-    )
-
     class Meta:
         model = Task
         fields = [
