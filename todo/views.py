@@ -5,7 +5,7 @@ from .serializers import TaskSerializer
 from drf_spectacular.utils import extend_schema
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema_view, extend_schema
 
 # Create your views here.
@@ -40,7 +40,7 @@ from drf_spectacular.utils import extend_schema_view, extend_schema
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="List all tasks",
@@ -61,8 +61,14 @@ class TaskViewSet(viewsets.ModelViewSet):
             }
         }
     )
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
     def list(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
+        tasks = self.get_queryset()
         serializer = self.get_serializer(tasks, many=True)
 
         return Response({
@@ -72,7 +78,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 
 class HelloView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Hello endpoint",
