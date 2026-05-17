@@ -67,6 +67,17 @@ class TaskViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def perform_update(self, serializer):
+        task = self.get_object()
+        if task.user != self.request.user:       
+            raise PermissionDenied("You can only edit your own tasks.")
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if instance.user != self.request.user:   
+            raise PermissionDenied("You can only delete your own tasks.")
+        instance.delete()
+
     def list(self, request, *args, **kwargs):
         tasks = self.get_queryset()
         serializer = self.get_serializer(tasks, many=True)
